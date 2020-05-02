@@ -122,11 +122,7 @@ void AVSInput::openfile(InputFileInfo& info)
 
 bool AVSInput::readPicture(x265_picture& pic)
 {
-    static AVS_VideoFrame *frm = nullptr;
-    if (frm)
-        h->func.avs_release_video_frame(frm);
-    
-    frm = h->func.avs_get_frame(h->clip, h->next_frame);
+    AVS_VideoFrame *frm = h->func.avs_get_frame(h->clip, h->next_frame);
     const char *err = h->func.avs_clip_get_error(h->clip);
     if (err)
     {
