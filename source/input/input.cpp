@@ -24,9 +24,6 @@
 #include "input.h"
 #include "yuv.h"
 #include "y4m.h"
-#ifdef ENABLE_AVISYNTH
-    #include "avs.h"
-#endif
 #ifdef ENABLE_LAVF
     #include "lavf.h"
 #endif
@@ -39,12 +36,6 @@ InputFile* InputFile::open(InputFileInfo& info, bool bForceY4m)
 
     if (bForceY4m || (s && !strcmp(s, ".y4m")))
         return new Y4MInput(info);
-
-#ifdef ENABLE_AVISYNTH
-    if (s && !strcmp(s, ".avs"))
-        return new AVSInput(info);
-#endif
-
 #ifdef ENABLE_LAVF
     if (s &&
         ( !strcmp(s, ".mp4")
